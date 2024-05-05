@@ -10,7 +10,7 @@ using Telegram.Bot.Types.Enums;
 public class TelegramBot
 {
     // Токен TG-бота. Можно получить у @BotFather
-    private const string BotToken = "ВАШ_ТОКЕН_ИДЕНТИФИКАЦИИ_БОТА";
+    private const string BotToken = "7028697496:AAEfNe6Cx910AOR16MwLFChuZj3bdc8rIsU";
     
     /// <summary>
     /// Инициализирует и обеспечивает работу бота до нажатия клавиши Esc
@@ -67,6 +67,9 @@ public class TelegramBot
         {
             return;
         }
+
+        //User user = new User(message.From.Id);
+            
         // Будем обрабатывать только текстовые сообщения.
         // При желании можно обрабатывать стикеры, фото, голосовые и т. д.
         //
@@ -90,6 +93,8 @@ public class TelegramBot
             chatId: chatId,
             text: "Ты написал:\n" + messageText,
             cancellationToken: cancellationToken);
+
+
     }
 
     /// <summary>

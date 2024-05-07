@@ -1,27 +1,37 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Serialization.Json;
+﻿using System;
+using Telegram.Bot.Types;
 
 namespace SimpleTGBot;
 
 public static class Program
 {
-    // Метод main немного видоизменился для асинхронной работы
     public static async Task Main(string[] args)
     {
-        //TelegramBot telegramBot = new TelegramBot();
-        //await telegramBot.Run();
+        TelegramBot telegramBot = new TelegramBot();
+        await telegramBot.Run();
 
-        Dictionary<int, int[]> users;
+        //MyUser user = new MyUser(1);
 
-        var formatter = new DataContractJsonSerializer(typeof(Dictionary<int, int[]>));
-
-        using (FileStream fs = new FileStream(@"..\..\..\users.json", FileMode.Open))
-        {
-
-                users = (Dictionary<int, int[]>)formatter.ReadObject(fs)!;
-
-                Console.WriteLine(users.ContainsKey(123)); 
-        }
+        //Console.WriteLine(MyFuncs.ShuffleString(user.GetActualWord()));
     }
+}
+
+class MyFuncs 
+{
+    public static string ShuffleString(string str)
+    {
+        Random random = new Random();
+
+        char[] charArray = str.ToCharArray();
+        int n = charArray.Length;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            char value = charArray[k];
+            charArray[k] = charArray[n];
+            charArray[n] = value;
+        }
+        return new string(charArray);
+    } 
 }

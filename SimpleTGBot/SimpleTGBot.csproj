@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="UserDatabase.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="SQLite" Version="3.13.0" />
       <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
       <PackageReference Include="Telegram.Bot" Version="19.0.0-preview.2" />

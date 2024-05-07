@@ -3,25 +3,25 @@
 public class UserDatabase
 {
     static SQLiteConnection connection;
-    static SQLiteCommand command;
+    static SQLiteCommand Command;
 
     public UserDatabase()
     {
-        if (Connect("users.sqlite"))
+        if (Connect())
     
             Console.WriteLine("Connected");
-            command = new SQLiteCommand(connection)
+            Command = new SQLiteCommand(connection)
             {
-                CommandText = "CREATE TABLE IF NOT EXISTS [User]([id] INTEGER, [name] TEXT, [regData] TEXT, [countGuessedWords] INTEGER, [balance] INTEGER);"
+                CommandText = "CREATE TABLE IF NOT EXISTS [User]([id] INTEGER, [name] TEXT, [regData] INTEGER, [countGuessedWords] INTEGER, [balance] INTEGER);"
             };
-            command.ExecuteNonQuery();
+            Command.ExecuteNonQuery();
         }
 
-    public bool Connect(string fileName)
+    public bool Connect()
     {
         try
         {
-            connection = new SQLiteConnection("Data Source=" + fileName + ";Version=3; FailIfMissing=False");
+            connection = new SQLiteConnection("Data Source=..\\..\\..\\users.db; Version=3; FailIfMissing=False");
             connection.Open();
             return true;
         }
@@ -32,15 +32,23 @@ public class UserDatabase
         }
     }
 
-    public void Insert(string line)
-    {
-        command.CommandText = line;
-        command.ExecuteNonQuery();
-    }
-
-    //public void RegUser(int id, string name)
+    //public void Insert(string line)
     //{
-    //    command.CommandText = $"INSERT INTO User (id, name, regData, countGuessedWords, balance) VALUES ({id}, {name}, {DateTime.Now}, 0, 0)";
+    //    command.CommandText = line;
     //    command.ExecuteNonQuery();
     //}
+
+    public void RegUser(int id, string name)
+    {
+        Command.CommandText = $"INSERT INTO User (id, name, regData, countGuessedWords, balance) VALUES ({id}, {name}, {DateTime.Now}, 0, 0)";
+        Command.ExecuteNonQuery();
+    }
+
+    public User GetUser(int id)
+    {
+        connection.Open();
+
+        Command command = new Command(sqlExpression, connection);
+        using (SqliteDataReader reader = command.ExecuteReader())
+    }
 }
